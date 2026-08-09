@@ -59,6 +59,11 @@
   .d-title { font-size:1.05rem; letter-spacing:4px; text-transform:uppercase; color:#a0762c; margin-bottom:18px; }
   .d-head { font-size:2.6rem; font-weight:bold; color:#7a5513; line-height:1.1; margin-bottom:10px; }
   .d-sub { font-style:italic; color:#8a6a2c; margin-bottom:14px; font-size:1.05rem; }
+  .d-photo { margin-bottom:14px; }
+  .d-photo img {
+    width:96px; height:96px; object-fit:cover; border-radius:50%;
+    border:3px solid #cda13a; box-shadow:0 4px 14px rgba(120,80,0,.3); background:#f3dfa8;
+  }
   .d-name { font-size:1.9rem; font-weight:bold; color:#8c5a12; border-bottom:2px solid rgba(190,145,50,.5); display:inline-block; padding:0 26px 6px; margin-bottom:22px; }
   .d-nums { display:flex; justify-content:center; gap:26px; flex-wrap:wrap; margin-bottom:18px; }
   .medal {
@@ -107,8 +112,10 @@
         <input type="number" id="year">
       </div>
     </div>
-    <label for="name" style="margin-top:16px;">Имя получателя грамоты</label>
-    <input type="text" id="name" placeholder="Например: Айгуль">
+    <label for="name" style="margin-top:16px;">Фамилия и имя получателя грамоты</label>
+    <input type="text" id="name" placeholder="Например: Бектасова Айгуль">
+    <label for="photo">Фото (необязательно — появится в грамоте)</label>
+    <input type="file" id="photo" accept="image/*" style="color:rgba(239,234,251,.6); margin-bottom:14px;">
     <button onclick="calculate()">Выдать грамоту ✨</button>
   </div>
 
@@ -118,6 +125,7 @@
       <div class="d-title">Гороскоп нумерологии</div>
       <div class="d-head">Число жизненного пути</div>
       <div class="d-sub">настоящим подтверждается, что</div>
+      <div class="d-photo" id="d-photo"><img id="d-photo-img" alt="Фото получателя"></div>
       <div class="d-name" id="d-name"></div>
       <div class="d-nums" id="d-nums"></div>
       <div class="d-desc" id="d-desc"></div>
@@ -245,6 +253,18 @@
 
     var name = document.getElementById('name').value.trim() || 'Дорогой друг';
     document.getElementById('d-name').textContent = name;
+
+    var photo = document.getElementById('photo');
+    var photoImg = document.getElementById('d-photo-img');
+    if (photo.files && photo.files.length > 0) {
+      var reader = new FileReader();
+      reader.onload = function(e){ photoImg.src = e.target.result; };
+      reader.readAsDataURL(photo.files[0]);
+      photoImg.style.display = 'block';
+    } else {
+      photoImg.removeAttribute('src');
+      photoImg.style.display = 'none';
+    }
 
     var life = reduce(d + m + y);
     var bday = reduce(d);
