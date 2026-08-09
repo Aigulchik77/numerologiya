@@ -96,6 +96,29 @@
 
   @media(max-width:560px){ .d-head{font-size:1.7rem} .d-name{font-size:1.3rem} .diploma{padding:52px 18px 26px} .medal{width:96px} .medal .mv{font-size:2rem} }
 
+  /* ===== ДЕКОР: салют и шарики на грамоте ===== */
+  .decor { position:absolute; inset:0; pointer-events:none; z-index:6; }
+  .decor svg { position:absolute; opacity:.95; }
+  .fxtl { top:8px; left:8px; }
+  .fxtr { top:8px; right:8px; }
+  .fxbl { bottom:8px; left:8px; }
+  .fxbr { bottom:8px; right:8px; }
+  .bal-tl { top:4px; left:52px; }
+  .bal-tr { top:4px; right:52px; }
+  @media(max-width:560px){
+    .bal-tl, .bal-tr { display:none; }
+    .fxtl,.fxtr{ width:52px; } .fxbl,.fxbr{ width:44px; }
+  }
+  @media print {
+    .decor svg { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .fxtl { top:6px; left:6px; width:52px; }
+    .fxtr { top:6px; right:6px; width:52px; }
+    .fxbl { bottom:6px; left:6px; width:44px; }
+    .fxbr { bottom:6px; right:6px; width:44px; }
+    .bal-tl { top:2px; left:34px; width:64px; }
+    .bal-tr { top:2px; right:34px; width:64px; }
+  }
+
   /* ===== ШАРИКИ И ФЕЙЕРВЕРК ===== */
   .celebrate { position:relative; }
   #fx { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:5; }
@@ -202,6 +225,73 @@
 
     <div class="diploma-wrap" id="result">
       <div class="diploma" id="diploma">
+        <div class="decor">
+          <svg class="fxtl" viewBox="0 0 100 100" width="72" aria-hidden="true">
+            <g stroke="#e74c3c" stroke-width="3" stroke-linecap="round">
+              <line x1="50" y1="50" x2="20" y2="20"/><line x1="50" y1="50" x2="80" y2="20"/>
+              <line x1="50" y1="50" x2="15" y2="55"/><line x1="50" y1="50" x2="85" y2="55"/>
+              <line x1="50" y1="50" x2="30" y2="85"/><line x1="50" y1="50" x2="70" y2="85"/>
+              <line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="50" y2="88"/>
+            </g>
+            <circle cx="20" cy="20" r="4" fill="#f39c12"/><circle cx="80" cy="20" r="4" fill="#2ecc71"/>
+            <circle cx="15" cy="55" r="4" fill="#e91e63"/><circle cx="85" cy="55" r="4" fill="#3498db"/>
+            <circle cx="30" cy="85" r="4" fill="#ffd166"/><circle cx="70" cy="85" r="4" fill="#9b59b6"/>
+            <circle cx="50" cy="12" r="4" fill="#e74c3c"/><circle cx="50" cy="88" r="4" fill="#1abc9c"/>
+          </svg>
+          <svg class="fxtr" viewBox="0 0 100 100" width="72" aria-hidden="true">
+            <g stroke="#2ecc71" stroke-width="3" stroke-linecap="round">
+              <line x1="50" y1="50" x2="20" y2="20"/><line x1="50" y1="50" x2="80" y2="20"/>
+              <line x1="50" y1="50" x2="15" y2="55"/><line x1="50" y1="50" x2="85" y2="55"/>
+              <line x1="50" y1="50" x2="30" y2="85"/><line x1="50" y1="50" x2="70" y2="85"/>
+              <line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="50" y2="88"/>
+            </g>
+            <circle cx="20" cy="20" r="4" fill="#3498db"/><circle cx="80" cy="20" r="4" fill="#e74c3c"/>
+            <circle cx="15" cy="55" r="4" fill="#ffd166"/><circle cx="85" cy="55" r="4" fill="#9b59b6"/>
+            <circle cx="30" cy="85" r="4" fill="#e91e63"/><circle cx="70" cy="85" r="4" fill="#f39c12"/>
+            <circle cx="50" cy="12" r="4" fill="#2ecc71"/><circle cx="50" cy="88" r="4" fill="#e74c3c"/>
+          </svg>
+          <svg class="fxbl" viewBox="0 0 100 100" width="60" aria-hidden="true">
+            <g stroke="#f39c12" stroke-width="3" stroke-linecap="round">
+              <line x1="50" y1="50" x2="20" y2="20"/><line x1="50" y1="50" x2="80" y2="20"/>
+              <line x1="50" y1="50" x2="15" y2="55"/><line x1="50" y1="50" x2="85" y2="55"/>
+              <line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="50" y2="88"/>
+            </g>
+            <circle cx="20" cy="20" r="4" fill="#e74c3c"/><circle cx="80" cy="20" r="4" fill="#3498db"/>
+            <circle cx="15" cy="55" r="4" fill="#ffd166"/><circle cx="85" cy="55" r="4" fill="#2ecc71"/>
+            <circle cx="50" cy="12" r="4" fill="#9b59b6"/><circle cx="50" cy="88" r="4" fill="#e91e63"/>
+          </svg>
+          <svg class="fxbr" viewBox="0 0 100 100" width="60" aria-hidden="true">
+            <g stroke="#e91e63" stroke-width="3" stroke-linecap="round">
+              <line x1="50" y1="50" x2="20" y2="20"/><line x1="50" y1="50" x2="80" y2="20"/>
+              <line x1="50" y1="50" x2="15" y2="55"/><line x1="50" y1="50" x2="85" y2="55"/>
+              <line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="50" y2="88"/>
+            </g>
+            <circle cx="20" cy="20" r="4" fill="#1abc9c"/><circle cx="80" cy="20" r="4" fill="#ffd166"/>
+            <circle cx="15" cy="55" r="4" fill="#e74c3c"/><circle cx="85" cy="55" r="4" fill="#9b59b6"/>
+            <circle cx="50" cy="12" r="4" fill="#2ecc71"/><circle cx="50" cy="88" r="4" fill="#f39c12"/>
+          </svg>
+
+          <svg class="bal-tl" viewBox="0 0 120 150" width="88" aria-hidden="true">
+            <path d="M28 40 C30 20 44 12 55 14" fill="none" stroke="#e74c3c" stroke-width="3"/>
+            <path d="M30 38 C34 18 48 10 58 12" fill="none" stroke="#e74c3c" stroke-width="3"/>
+            <ellipse cx="30" cy="30" rx="15" ry="19" fill="#e74c3c"/>
+            <ellipse cx="52" cy="22" rx="13" ry="17" fill="#3498db"/>
+            <path d="M26 30 L34 30 L30 22 Z" fill="#a8342b"/>
+            <path d="M48 22 L56 22 L52 14 Z" fill="#2a6fa8"/>
+            <line x1="30" y1="49" x2="30" y2="150" stroke="#000" stroke-width="1.5" opacity=".3"/>
+            <line x1="52" y1="39" x2="52" y2="150" stroke="#000" stroke-width="1.5" opacity=".3"/>
+          </svg>
+          <svg class="bal-tr" viewBox="0 0 120 150" width="88" aria-hidden="true">
+            <path d="M28 40 C30 20 44 12 55 14" fill="none" stroke="#f39c12" stroke-width="3"/>
+            <path d="M30 38 C34 18 48 10 58 12" fill="none" stroke="#f39c12" stroke-width="3"/>
+            <ellipse cx="30" cy="30" rx="15" ry="19" fill="#f39c12"/>
+            <ellipse cx="52" cy="22" rx="13" ry="17" fill="#2ecc71"/>
+            <path d="M26 30 L34 30 L30 22 Z" fill="#c07a0e"/>
+            <path d="M48 22 L56 22 L52 14 Z" fill="#1f9e5b"/>
+            <line x1="30" y1="49" x2="30" y2="150" stroke="#000" stroke-width="1.5" opacity=".3"/>
+            <line x1="52" y1="39" x2="52" y2="150" stroke="#000" stroke-width="1.5" opacity=".3"/>
+          </svg>
+        </div>
         <div class="ribbon">🎁 Подарочная грамота</div>
         <div class="d-title">Нумерологическая характеристика</div>
         <div class="d-sub">настоящим подтверждается, что</div>
