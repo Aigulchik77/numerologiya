@@ -96,6 +96,41 @@
 
   @media(max-width:560px){ .d-head{font-size:1.7rem} .d-name{font-size:1.3rem} .diploma{padding:52px 18px 26px} .medal{width:96px} .medal .mv{font-size:2rem} }
 
+  /* ===== ШАРИКИ И ФЕЙЕРВЕРК ===== */
+  .celebrate { position:relative; }
+  #fx { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:5; }
+  .balloons { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:4; }
+  .balloon {
+    position:absolute; bottom:-70px; width:34px; height:44px; border-radius:50% 50% 50% 50% / 55% 55% 45% 45%;
+    opacity:.85; animation:floatUp linear infinite;
+  }
+  .balloon::after {
+    content:""; position:absolute; left:50%; top:100%; width:2px; height:26px; background:rgba(0,0,0,.25); transform:translateX(-50%);
+  }
+  .balloon::before {
+    content:""; position:absolute; left:50%; top:-7px; transform:translateX(-50%);
+    border-left:4px solid transparent; border-right:4px solid transparent; border-bottom:8px solid #fff; opacity:.9;
+  }
+  .b1 { left:3%; background:#e74c3c; animation-duration:9s; animation-delay:0s; }
+  .b2 { left:13%; background:#f39c12; animation-duration:11s; animation-delay:1s; }
+  .b3 { left:24%; background:#3498db; animation-duration:10s; animation-delay:2s; }
+  .b4 { left:34%; background:#2ecc71; animation-duration:12s; animation-delay:.5s; }
+  .b5 { left:45%; background:#e91e63; animation-duration:9.5s; animation-delay:1.5s; }
+  .b6 { left:56%; background:#9b59b6; animation-duration:11.5s; animation-delay:3s; }
+  .b7 { left:66%; background:#1abc9c; animation-duration:10.5s; animation-delay:.8s; }
+  .b8 { left:77%; background:#f1c40f; animation-duration:9.8s; animation-delay:2.5s; }
+  .b9 { left:87%; background:#ff6f61; animation-duration:12.5s; animation-delay:1.2s; }
+  .b10 { left:95%; background:#8e44ad; animation-duration:10.2s; animation-delay:3.5s; }
+  @keyframes floatUp {
+    0% { transform:translateY(0) rotate(-4deg); }
+    100% { transform:translateY(-120vh) rotate(4deg); }
+  }
+  .balloon:hover { animation-play-state:paused; }
+
+  @media print {
+    #fx, .balloons { display:none !important; }
+  }
+
   /* ===== ПЕЧАТЬ: только грамота на одном листе ===== */
   @media print {
     @page { margin: 8mm; size: A4 portrait; }
@@ -155,22 +190,33 @@
     <button onclick="calculate()">Выдать грамоту ✨</button>
   </div>
 
-  <div class="diploma-wrap" id="result">
-    <div class="diploma" id="diploma">
-      <div class="ribbon">🎁 Подарочная грамота</div>
-      <div class="d-title">Нумерологическая характеристика</div>
-      <div class="d-sub">настоящим подтверждается, что</div>
-      <div class="d-photo" id="d-photo"><img id="d-photo-img" alt="Фото получателя"></div>
-      <div class="d-name" id="d-name"></div>
-      <div class="d-role">является — <span id="d-role"></span></div>
-      <div class="d-head">Число жизненного пути — <span id="d-life-num"></span></div>
-      <div class="d-nums" id="d-nums"></div>
-      <div class="read" id="d-read"></div>
-      <div class="d-seal"><span>✦</span> Расчёт произведён по дате рождения <span>✦</span></div>
+  <div class="celebrate" id="celebrate">
+    <canvas id="fx" width="800" height="600"></canvas>
+    <div class="balloons" id="balloons">
+      <span class="balloon b1"></span><span class="balloon b2"></span>
+      <span class="balloon b3"></span><span class="balloon b4"></span>
+      <span class="balloon b5"></span><span class="balloon b6"></span>
+      <span class="balloon b7"></span><span class="balloon b8"></span>
+      <span class="balloon b9"></span><span class="balloon b10"></span>
     </div>
 
-    <div class="actions">
-      <button class="btn2 ghost" onclick="window.print()">🖨️ Распечатать грамоту</button>
+    <div class="diploma-wrap" id="result">
+      <div class="diploma" id="diploma">
+        <div class="ribbon">🎁 Подарочная грамота</div>
+        <div class="d-title">Нумерологическая характеристика</div>
+        <div class="d-sub">настоящим подтверждается, что</div>
+        <div class="d-photo" id="d-photo"><img id="d-photo-img" alt="Фото получателя"></div>
+        <div class="d-name" id="d-name"></div>
+        <div class="d-role">является — <span id="d-role"></span></div>
+        <div class="d-head">Число жизненного пути — <span id="d-life-num"></span></div>
+        <div class="d-nums" id="d-nums"></div>
+        <div class="read" id="d-read"></div>
+        <div class="d-seal"><span>✦</span> Расчёт произведён по дате рождения <span>✦</span></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn2 ghost" onclick="window.print()">🖨️ Распечатать грамоту</button>
+      </div>
     </div>
   </div>
 
@@ -349,7 +395,69 @@
 
     document.getElementById('result').classList.add('show');
     document.getElementById('result').scrollIntoView({behavior:'smooth'});
+    startFireworks();
   }
+
+  /* ===== ФЕЙЕРВЕРК ===== */
+  var fxRunning = false, fxTimer = null;
+  function startFireworks() {
+    var c = document.getElementById('fx');
+    var rect = document.getElementById('celebrate').getBoundingClientRect();
+    c.width = Math.max(rect.width, 400);
+    c.height = Math.max(rect.height, 300);
+    var ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    fxRunning = true;
+    var parts = [];
+    function spawn() {
+      var x = c.width * (0.15 + Math.random() * 0.7);
+      var y = c.height * (0.15 + Math.random() * 0.4);
+      var colors = ['#ffd166','#e74c3c','#2ecc71','#3498db','#e91e63','#f39c12','#9b59b6'];
+      var col = colors[Math.floor(Math.random()*colors.length)];
+      var n = 30 + Math.floor(Math.random()*25);
+      for (var i=0;i<n;i++) {
+        var a = Math.random()*Math.PI*2;
+        var sp = 1.5 + Math.random()*3.5;
+        parts.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,decay:0.012+Math.random()*0.015,col:col});
+      }
+    }
+    var maxBursts = 6;
+    var burstCount = 0;
+    var interval = setInterval(function(){ if (burstCount < maxBursts) { spawn(); burstCount++; } }, 420);
+    function frame() {
+      ctx.clearRect(0, 0, c.width, c.height);
+      for (var i=parts.length-1;i>=0;i--) {
+        var p = parts[i];
+        p.x += p.vx; p.y += p.vy;
+        p.vy += 0.045;
+        p.life -= p.decay;
+        if (p.life <= 0) { parts.splice(i,1); continue; }
+        ctx.globalAlpha = Math.max(p.life, 0);
+        ctx.fillStyle = p.col;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (parts.length > 0 || burstCount < maxBursts) {
+        fxTimer = requestAnimationFrame(frame);
+      } else {
+        ctx.clearRect(0, 0, c.width, c.height);
+        clearInterval(interval);
+        fxRunning = false;
+      }
+    }
+    if (fxTimer) cancelAnimationFrame(fxTimer);
+    frame();
+  }
+  window.addEventListener('resize', function(){
+    if (fxRunning) {
+      var c = document.getElementById('fx');
+      var rect = document.getElementById('celebrate').getBoundingClientRect();
+      c.width = Math.max(rect.width, 400);
+      c.height = Math.max(rect.height, 300);
+    }
+  });
 </script>
 </body>
 </html>
