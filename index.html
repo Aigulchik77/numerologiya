@@ -91,6 +91,25 @@
 
   .d-seal { text-align:center; margin-top:20px; font-family:'Segoe UI',Arial,sans-serif; font-size:.85rem; color:#7a5513; }
 
+  /* Подпись Вселенной */
+  .d-sign {
+    display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-top:26px;
+    font-family:'Segoe UI',Arial,sans-serif;
+  }
+  .sign-item { flex:1; text-align:center; }
+  .sign-line { border-bottom:2px solid rgba(140,90,18,.6); height:34px; margin:0 4px; }
+  .sign-cap { font-size:.72rem; letter-spacing:1px; text-transform:uppercase; color:#a0762c; margin-top:6px; }
+  .sign-stamp {
+    display:inline-block; padding:10px 14px; border:2px solid rgba(180,120,30,.55); border-radius:14px;
+    background:rgba(255,255,255,.35); transform:rotate(-6deg);
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .stamp-text { font-size:1rem; font-weight:800; letter-spacing:3px; color:#8c5a12; margin:0 6px; }
+  @media(max-width:560px){
+    .sign-stamp { padding:8px 10px; }
+    .stamp-text { font-size:.85rem; letter-spacing:2px; }
+  }
+
   .actions { text-align:center; margin-top:24px; }
   .btn2 { display:inline-block; padding:12px 28px; border-radius:12px; background:linear-gradient(135deg,#ffd166,#f4a261); color:#2a1448; font-weight:700; cursor:pointer; border:none; font-family:'Segoe UI',Arial,sans-serif; font-size:1rem; margin:6px; }
   .btn2:hover { transform:translateY(-2px); }
@@ -189,6 +208,11 @@
     .mini-block .bh { font-size:.75rem; }
     .mini-block p { font-size:.62rem; line-height:1.25; margin-top:2px; }
     .d-seal { margin-top:6px; font-size:.68rem; }
+    .d-sign { margin-top:14px; gap:10px; }
+    .sign-line { height:22px; }
+    .sign-cap { font-size:.6rem; margin-top:4px; }
+    .sign-stamp { padding:6px 10px; border-width:1.5px; }
+    .stamp-text { font-size:.75rem; letter-spacing:2px; }
   }
 </style>
 </head>
@@ -306,6 +330,11 @@
         <div class="d-nums" id="d-nums"></div>
         <div class="read" id="d-read"></div>
         <div class="d-seal"><span>✦</span> Расчёт произведён по дате рождения <span>✦</span></div>
+        <div class="d-sign">
+          <div class="sign-item"><div class="sign-line" id="sign-line-1"></div><div class="sign-cap">Подпись</div></div>
+          <div class="sign-item"><div class="sign-stamp">✶<span class="stamp-text">ВСЕЛЕННАЯ</span>✶</div><div class="sign-cap">Печать и подпись</div></div>
+          <div class="sign-item"><div class="sign-line" id="sign-line-2"></div><div class="sign-cap">Дата</div></div>
+        </div>
       </div>
 
       <div class="actions">
