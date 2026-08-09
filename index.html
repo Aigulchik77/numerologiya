@@ -95,14 +95,36 @@
 
   @media(max-width:560px){ .d-head{font-size:1.7rem} .d-name{font-size:1.3rem} .diploma{padding:52px 18px 26px} .medal{width:96px} .medal .mv{font-size:2rem} }
 
-  /* ===== ПЕЧАТЬ: только грамота ===== */
+  /* ===== ПЕЧАТЬ: только грамота на одном листе ===== */
   @media print {
-    @page { margin: 12mm; }
+    @page { margin: 8mm; size: A4 portrait; }
     body { background:#fff; }
     header, .form-card, .actions, footer { display:none !important; }
-    .wrap { max-width:100%; padding:0; }
+    .wrap { max-width:100%; padding:0; margin:0; }
     .diploma-wrap { display:block !important; animation:none; }
-    .diploma { box-shadow:none; border-radius:0; padding:30px 24px 24px; }
+    .diploma { box-shadow:none; border-radius:0; padding:14px 16px 10px; margin:0; }
+    .diploma::before { inset:8px; }
+    .diploma::after { inset:13px; }
+    .ribbon { top:-16px; padding:6px 26px; font-size:.85rem; }
+    .d-title { margin-bottom:8px; font-size:.85rem; }
+    .d-sub { margin-bottom:6px; font-size:.9rem; }
+    .d-photo { margin-bottom:6px; }
+    .d-photo img { width:60px; height:60px; border-width:2px; }
+    .d-name { font-size:1.3rem; margin-bottom:8px; padding-bottom:3px; }
+    .d-head { font-size:1.5rem; margin-bottom:4px; }
+    .d-nums { gap:14px; margin-bottom:10px; }
+    .medal { width:84px; padding:8px 4px; }
+    .medal .mv { font-size:1.7rem; }
+    .medal .mk { font-size:.5rem; margin-top:2px; }
+    .read h3 { font-size:.8rem; margin:4px 0 8px; }
+    .block { padding:6px 10px; margin-bottom:6px; border-radius:6px; }
+    .block .bh { font-size:.85rem; margin-bottom:3px; }
+    .block p { font-size:.72rem; line-height:1.35; margin-bottom:4px; }
+    .block p:last-child { margin-bottom:0; }
+    .mini-block { padding:5px 10px; margin-bottom:5px; }
+    .mini-block .bh { font-size:.8rem; }
+    .mini-block p { font-size:.68rem; line-height:1.3; margin-top:2px; }
+    .d-seal { margin-top:8px; font-size:.72rem; }
   }
 </style>
 </head>
